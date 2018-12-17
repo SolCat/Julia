@@ -1,3 +1,5 @@
+import Unicode
+
 mutable struct ArbreMots
 	terminal::Bool
 	nb::Int64
@@ -97,13 +99,25 @@ function chercherMotsPrefixeArbre(arbre, prefixe)
 end
 
 function chercherMotsSuffixeArbre(arbre, suffixe)
-	mots = []
+
+end
+
+
+# Fonction renvoyant le mot d'un texte de score maximal au Scrabble
+function scoreMaxMotArbre(arbre, dico)
+	(scoremax, motmax) = (0, "")
 	if(arbre.terminal)
-		push!(mots, "")
+		return (scoremax, motmax)
 	end
 	for (k,fils) in arbre.suite
-		nouveaux = [string(k)*mot for mot in chercherMots(fils)]
-		append!(mots, nouveaux)
+		if(all(isletter, string(k)))
+			score, mot = scoreMaxMotArbre(fils, dico)
+			println(k)
+			kscore = dico[Unicode.normalize(string(k), stripmark=true)[1]]
+			if((score+kscore)>scoremax)
+				(scoremax, motmax) = (score+kscore, k*mot)
+			end
+		end
 	end
-	return mots
+	return (scoremax, motmax)
 end
