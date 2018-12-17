@@ -52,10 +52,22 @@ end
 
 # Fonction renvoyant la liste des mots commençant par une chaine de caractères donnée
 function chercherMotsPrefixeTab(tableau, prefixe)
-	return([mot for mot in tableau.mots if startswith(mot, prefixe)])
+	return([mot for mot in tableau.mots if endswith(mot, uppercase(prefixe))])
 end
 
 # Fonction renvoyant la liste des mots terminant par une chaine de caractères donnée
 function chercherMotsSuffixeTab(tableau, suffixe)
-	return([mot for mot in tableau.mots if endswith(mot, suffixe)])
+	return([mot for mot in tableau.mots if endswith(mot, uppercase(suffixe))])
 end
+
+# Fonction renvoyant le mot d'un texte de score maximal au Scrabble
+function scoreMaxMotTab(tableau, mot)
+	maxScore = 0
+	scrabbleDico = Dict('A' => 1, 'E' => 1, 'I' => 1, 'O' => 1, 'U' => 1, 'L' => 1,
+		  'N' => 1, 'R' => 1, 'S' => 1, 'T' => 1, 'D' => 2, 'G' => 2, 'B' => 3,
+		  'C' => 3, 'M' => 3, 'P' => 3, 'F' => 4, 'H' => 4, 'V' => 4, 'W' => 4,
+		  'Y' => 4, 'K' => 5, 'J' => 8, 'X' => 8, 'Q' => 10, 'Z' => 10)
+	return(sum(get(scrabbleDico, mot, 0) for mot in tableau.mots))
+	
+end
+
