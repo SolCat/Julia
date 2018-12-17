@@ -10,7 +10,7 @@ end
 
 Base.show(io::IO, tab::TableauMots) = print(io, " $(tab.nbMots) words, $(tab.nbMotsDistincts) distincts words")
 
-function segmenterTexte(texte)
+function segmenterTexteTableau(texte)
     tabMots = TableauMots()
     sep = [' ',',',';','.','-','_','\'','`','\"','/',')','(','{','}','[',']','=','+','@','!','?','%']
     flux = open(texte,"r")
@@ -37,7 +37,7 @@ function ajouterMotsTableau(tableau, ligne)
 end
 
 # Fonction détectant si un mot est présent ou non
-function verifierMot(mot, tableau)
+function verifierMotTableau(mot, tableau)
 	if in(uppercase(mot), tableau.mots)
 	   return true
 	else
@@ -46,25 +46,10 @@ function verifierMot(mot, tableau)
 end
 
 # Fonction calculant la longeur moyenne des mots du texte
-function calculerLongMoyMot(tableau)
+function calculerLongMoyMotTab(tableau)
 	return floor(Int,sum([length(mot) for mot in tableau.mots])/length(tableau.mots))
 end
 
-texteCyrano = "./cyrano.txt"
-textePetitPrince = "./le_petit_prince.txt"
-texteOeuvres = "./oeuvres.txt"
-
-
-# Tests : segmentation de textes
-cyrano = segmenterTexte(texteCyrano) # 36 280 mots dont 5 482 différents
-println(texteCyrano, cyrano)
-prince = segmenterTexte(textePetitPrince) # 15 426 mots dont 2 403 différents
-println(textePetitPrince, prince)
-
-# Tests : détection de mot dans un texte
-println(verifierMot("Rostand", cyrano)) # true
-println(verifierMot("Cyrano", prince)) # false
-
-#Test : calcul de la longueur moyenne d'un mot dans un texte
-println(calculerLongMoyMot(cyrano)) # 6
-println(calculerLongMoyMot(prince)) # 6
+# Fonction renvoyant la liste des mots commençant par une chaine de caractères donnée
+function chercherMotsPrefixe(tableau, prefixe)
+end
