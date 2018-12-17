@@ -25,6 +25,8 @@ textePetitPrince = "./le_petit_prince.txt" # 15 426 mots dont 2 403 différents
 # Liste des mots commençant par une chaine de caractères donnée
 @time chercherMotsPrefixeTab(cyranotab, "am") # Version Tableau
 @time chercherMotsPrefixeTab(princetab, "ros")
+@time chercherMotsPrefixeArbre(cyranoarb, "am") # Version Arbre
+@time chercherMotsPrefixeArbre(princearb, "ros")
 
 # Liste des mots terminant par une chaine de caractères donnée
 @time chercherMotsSuffixeTab(cyranotab, "acher") # Version Tableau

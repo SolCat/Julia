@@ -66,6 +66,21 @@ function calculerNbMotsDisctinctsArbre(arbre)
 	return count
 end
 
-texteCyrano = "./cyrano.txt"
-textePetitPrince = "./le_petit_prince.txt"
-texteOeuvres = "./oeuvres.txt"
+function chercherMotsPrefixeArbre(arbre, prefixe)
+	if(prefixe=="")
+		mots = []
+		if(arbre.terminal)
+			push!(mots, "")
+		end
+		for (k,fils) in arbre.suite
+			append!(mots, [string(k)*mot for mot in chercherMotsPrefixeArbre(fils, "")])
+		end
+		return mots
+	else
+		first = uppercase(prefixe[1])
+		if(!(first in keys(arbre.suite)))
+			return []
+		end
+		return [string(first)*mot for mot in chercherMotsPrefixeArbre(arbre.suite[first], prefixe[nextind(prefixe, 1):end])]
+	end
+end
