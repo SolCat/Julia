@@ -20,3 +20,6 @@ textePetitPrince = "./le_petit_prince.txt" # 15 426 mots dont 2 403 différents
 
 # Calcul de la longueur moyenne d'un mot dans un texte
 @time calculerLongMoyMotTab(segmenterTexteTableau(texteCyrano))
+
+# Renvoie la liste des mots commençant par une chaine de caractères donnée
+@time chercherMotsPrefixe(segmenterTexteTableau(texteCyrano), "mo")

@@ -52,4 +52,7 @@ end
 
 # Fonction renvoyant la liste des mots commençant par une chaine de caractères donnée
 function chercherMotsPrefixe(tableau, prefixe)
+	return([mot for mot in tableau.mots if startswith(mot, prefixe)])
 end
+
+
