@@ -7,6 +7,8 @@ mutable struct ArbreMots
     end
 end
 
+Base.show(io::IO, a::ArbreMots) = print(io, " $(a.nb) words, $(calculerNbMotsDisctinctsArbre(a)) distincts words")
+
 function segmenterTexteArbre(texte)
 	arbreMots = ArbreMots()
     sep = [' ',',',';','.','-','_','\'','`','\"','/',')','(','{','}','[',']','=','+','@','!','?','%']
@@ -29,28 +31,41 @@ function ajouterMotArbre(arbre, mot)
 		arbre.terminal = true
 	else
 		first = mot[1]
-		if(!(first in keys(mot)))
+		if(!(first in keys(arbre.suite)))
 			arbre.suite[first] = ArbreMots()
 		end
 		ajouterMotArbre(arbre.suite[first], mot[nextind(mot, 1):end])
-		arbre.terminal = false
 		arbre.nb += 1
 	end
 end
 
 # Fonction détectant si un mot est présent ou non
-function verifierMot(mot, texte)
+function verifierMotArbre(mot, arbre)
+	if mot == ""
+		return arbre.terminal
+	else
+		first = uppercase(mot[1])
+		if(!(first in keys(arbre.suite)))
+			return false
+		end
+		return verifierMotArbre(mot[nextind(mot, 1):end], arbre.suite[first])
+	end
 end
 
 # Fonction calculant la longeur moyenne des mots du texte
-function calculerLongMoyMot(texte)
+function calculerLongMoyMotArbre(arbre)
+	return floor(Int,(arbre.nb/calculerNbMotsDisctinctsArbre(arbre)))
+end
+
+# Fonction calculant le nombre de mots distincts du texte
+function calculerNbMotsDisctinctsArbre(arbre)
+	count = arbre.terminal
+	for (k,fils) in arbre.suite
+		count += calculerNbMotsDisctinctsArbre(fils)
+	end
+	return count
 end
 
 texteCyrano = "./cyrano.txt"
 textePetitPrince = "./le_petit_prince.txt"
 texteOeuvres = "./oeuvres.txt"
-
-#cyrano = segmenterTexteArbre(texteCyrano) # 36 280 mots dont 5 482 différents
-#println(texteCyrano, cyrano)
-#prince = segmenterTexteArbre(textePetitPrince) # 15 426 mots dont 2 403 différents
-#println(textePetitPrince, prince)

@@ -5,21 +5,27 @@ texteCyrano = "./cyrano.txt" # 36 280 mots dont 5 482 différents
 textePetitPrince = "./le_petit_prince.txt" # 15 426 mots dont 2 403 différents
 
 # Segmentation du texte #
-# Version Tableau
-@time segmenterTexteTableau(texteCyrano)
-@time segmenterTexteTableau(textePetitPrince)
-# Version Arbre
-@time segmenterTexteArbre(texteCyrano)
-@time segmenterTexteArbre(textePetitPrince)
+@time cyranotab = segmenterTexteTableau(texteCyrano) # Version Tableau
+@time princetab = segmenterTexteTableau(textePetitPrince)
+
+@time cyranoarb = segmenterTexteArbre(texteCyrano) # Version Arbre
+@time princearb = segmenterTexteArbre(textePetitPrince)
 
 # Détection de mot dans un texte #
-# Version Tableau
-@time verifierMotTableau("Jaloux", segmenterTexteTableau(texteCyrano))
-@time verifierMotTableau("rose", segmenterTexteTableau(textePetitPrince))
-# Version Arbre
+@time verifierMotTableau("Jaloux", cyranotab) # Version Tableau
+@time verifierMotTableau("rose", princetab)
+
+@time verifierMotArbre("Jaloux", cyranoarb) # Version Arbre
+@time verifierMotArbre("rose", princearb)
 
 # Calcul de la longueur moyenne d'un mot dans un texte
-@time calculerLongMoyMotTab(segmenterTexteTableau(texteCyrano))
+@time calculerLongMoyMotTab(cyranotab) # Version Tableau
+@time calculerLongMoyMotArbre(cyranoarb) # Version Arbre
 
-# Renvoie la liste des mots commençant par une chaine de caractères donnée
-@time chercherMotsPrefixe(segmenterTexteTableau(texteCyrano), "mo")
+# Liste des mots commençant par une chaine de caractères donnée
+@time chercherMotsPrefixeTab(cyranotab, "am") # Version Tableau
+@time chercherMotsPrefixeTab(princetab, "ros")
+
+# Liste des mots terminant par une chaine de caractères donnée
+@time chercherMotsSuffixeTab(cyranotab, "acher") # Version Tableau
+@time chercherMotsSuffixeTab(princetab, "eur")

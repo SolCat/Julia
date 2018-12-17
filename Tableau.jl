@@ -51,8 +51,11 @@ function calculerLongMoyMotTab(tableau)
 end
 
 # Fonction renvoyant la liste des mots commençant par une chaine de caractères donnée
-function chercherMotsPrefixe(tableau, prefixe)
+function chercherMotsPrefixeTab(tableau, prefixe)
 	return([mot for mot in tableau.mots if startswith(mot, prefixe)])
 end
 
-
+# Fonction renvoyant la liste des mots terminant par une chaine de caractères donnée
+function chercherMotsSuffixeTab(tableau, suffixe)
+	return([mot for mot in tableau.mots if endswith(mot, suffixe)])
+end
