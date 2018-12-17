@@ -8,13 +8,15 @@ mutable struct TableauMots
     end
 end
 
+Base.show(io::IO, tab::TableauMots) = print(io, " $(tab.nbMots) words, $(tab.nbMotsDistincts) distincts words")
+
 function segmenterTexte(texte)
     tabMots = TableauMots()
-    sep = [' ',',',';','.','-','_','\'','`','\"','/',')','(','{','}','[',']','=','+','@','!','?','%'] 
+    sep = [' ',',',';','.','-','_','\'','`','\"','/',')','(','{','}','[',']','=','+','@','!','?','%']
     flux = open(texte,"r")
     while ! eof(flux)
         ligne = readline(flux)
-        spl = split(lowercase(ligne), sep) 
+        spl = split(uppercase(ligne), sep)
         ajouterMotsTableau(tabMots, spl)
     end
     close(flux)
@@ -35,18 +37,16 @@ function ajouterMotsTableau(tableau, ligne)
 end
 
 # Fonction détectant si un mot est présent ou non
-function verifierMot(mot, texte)
-	tableau = segmenterTexte(texte)
-	if in(lowercase(mot), tableau.mots)
-	   return true 	
+function verifierMot(mot, tableau)
+	if in(uppercase(mot), tableau.mots)
+	   return true
 	else
 	   return false
 	end
 end
 
 # Fonction calculant la longeur moyenne des mots du texte
-function calculerLongMoyMot(texte)
-	tableau = segmenterTexte(texte)
+function calculerLongMoyMot(tableau)
 	return floor(Int,sum([length(mot) for mot in tableau.mots])/length(tableau.mots))
 end
 
@@ -56,13 +56,15 @@ texteOeuvres = "./oeuvres.txt"
 
 
 # Tests : segmentation de textes
-# segmenterTexte(texteCyrano) # 36 280 mots dont 5 482 différents
-# segmenterTexte(textePetitPrince) # 15 426 mots dont 2 403 différents
+cyrano = segmenterTexte(texteCyrano) # 36 280 mots dont 5 482 différents
+println(texteCyrano, cyrano)
+prince = segmenterTexte(textePetitPrince) # 15 426 mots dont 2 403 différents
+println(textePetitPrince, prince)
 
 # Tests : détection de mot dans un texte
-# println(verifierMot("Rostand", texteCyrano)) # true
-# println(verifierMot("Cyrano", textePetitPrince)) # false
+println(verifierMot("Rostand", cyrano)) # true
+println(verifierMot("Cyrano", prince)) # false
 
 #Test : calcul de la longueur moyenne d'un mot dans un texte
-# println(calculerLongMoyMot(texteCyrano)) # 6
-# println(calculerLongMoyMot(textePetitPrince)) # 6
+println(calculerLongMoyMot(cyrano)) # 6
+println(calculerLongMoyMot(prince)) # 6

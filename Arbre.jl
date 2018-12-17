@@ -8,10 +8,36 @@ mutable struct ArbreMots
 end
 
 function segmenterTexte(texte)
-    arbre = ArbreMots()
+	arbreMots = ArbreMots()
+    sep = [' ',',',';','.','-','_','\'','`','\"','/',')','(','{','}','[',']','=','+','@','!','?','%']
+    flux = open(texte,"r")
+    while ! eof(flux)
+        ligne = readline(flux)
+        spl = split(uppercase(ligne), sep)
+		for mot in spl
+			println(mot)
+			if length(mot) > 0
+        		ajouterMotArbre(arbreMots, mot)
+			end
+		end
+    end
+    close(flux)
+    return arbreMots
 end
 
-function ajouterMotsArbre(arbre, ligne)
+function ajouterMotArbre(arbre, mot)
+	if mot == ""
+		arbre.terminal = true
+	else
+		first = mot[1]
+		if(!(first in keys(mot)))
+			arbre.suite[first] = ArbreMots()
+		end
+		println(first)
+		ajouterMotArbre(arbre.suite[first], mot[nextind(mot, 1):end])
+		arbre.terminal = false
+		arbre.nb += 1
+	end
 end
 
 # Fonction détectant si un mot est présent ou non
@@ -25,3 +51,8 @@ end
 texteCyrano = "./cyrano.txt"
 textePetitPrince = "./le_petit_prince.txt"
 texteOeuvres = "./oeuvres.txt"
+
+cyrano = segmenterTexte(texteCyrano) # 36 280 mots dont 5 482 différents
+println(texteCyrano, cyrano)
+prince = segmenterTexte(textePetitPrince) # 15 426 mots dont 2 403 différents
+println(textePetitPrince, prince)
