@@ -66,6 +66,17 @@ function calculerNbMotsDisctinctsArbre(arbre)
 	return count
 end
 
+function chercherMots(arbre)
+	mots = []
+	if(arbre.terminal)
+		push!(mots, "")
+	end
+	for (k,fils) in arbre.suite
+		append!(mots, [string(k)*mot for mot in chercherMots(fils)])
+	end
+	return mots
+end
+
 function chercherMotsPrefixeArbre(arbre, prefixe)
 	if(prefixe=="")
 		mots = []
@@ -83,4 +94,16 @@ function chercherMotsPrefixeArbre(arbre, prefixe)
 		end
 		return [string(first)*mot for mot in chercherMotsPrefixeArbre(arbre.suite[first], prefixe[nextind(prefixe, 1):end])]
 	end
+end
+
+function chercherMotsSuffixeArbre(arbre, suffixe)
+	mots = []
+	if(arbre.terminal)
+		push!(mots, "")
+	end
+	for (k,fils) in arbre.suite
+		nouveaux = [string(k)*mot for mot in chercherMots(fils)]
+		append!(mots, nouveaux)
+	end
+	return mots
 end
