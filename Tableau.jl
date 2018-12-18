@@ -44,11 +44,7 @@ end
 
 # Fonction détectant si un mot est présent ou non
 function verifierMotTableau(mot, tableau)
-	if in(uppercase(mot), tableau.mots)
-	   return true
-	else
-	   return false
-	end
+	return in(uppercase(mot), tableau.mots)
 end
 
 # Fonction calculant la longeur moyenne des mots du texte
@@ -58,7 +54,7 @@ end
 
 # Fonction renvoyant la liste des mots commençant par une chaine de caractères donnée
 function chercherMotsPrefixeTab(tableau, prefixe)
-	return([mot for mot in tableau.mots if endswith(mot, uppercase(prefixe))])
+	return([mot for mot in tableau.mots if startswith(mot, uppercase(prefixe))])
 end
 
 # Fonction renvoyant la liste des mots terminant par une chaine de caractères donnée
