@@ -16,10 +16,10 @@ princetab = segmenterTexteTableau(textePetitPrince)
 cyranoarb = segmenterTexteArbre(texteCyrano) # Version Arbre
 princearb = segmenterTexteArbre(textePetitPrince)
 
-println(calculerLongMoyMotDistinctsArbre(cyranoarb))
-println(calculerLongMoyMotDistinctsArbre(princearb))
-println(calculerLongMoyMotArbre(cyranoarb))
-println(calculerLongMoyMotArbre(princearb))
+# println(calculerLongMoyMotDistinctsArbre(cyranoarb))
+# println(calculerLongMoyMotDistinctsArbre(princearb))
+# println(calculerLongMoyMotArbre(cyranoarb))
+# println(calculerLongMoyMotArbre(princearb))
 
 # # Liste des mots commençant par une chaine de caractères donnée
 # println(chercherMotsPrefixeTab(cyranotab, "am")) # Version Tableau
@@ -39,5 +39,10 @@ println(calculerLongMoyMotArbre(princearb))
 
 # Mot d'un texte de score maximal au Scrabble
 # println(scoreMaxMotTab(cyranotab, scrabbleDico)) # Version Tableau
-
 # println(scoreMaxMotArbre(cyranoarb, scrabbleDico))
+#
+# println(scoreMaxMotTab(princetab, scrabbleDico)) # Version Tableau
+# println(scoreMaxMotArbre(princearb, scrabbleDico))
+
+println(chercherMots(cyranoarb)[1:20])
+println(motsSansLettre(cyranoarb, 'e')[1:20])

@@ -112,6 +112,21 @@ function chercherMots(arbre)
 	return mots
 end
 
+function motsSansLettre(arbre, c)
+	mots = []
+	if(arbre.terminal)
+		push!(mots, "")
+	end
+	for (k,fils) in arbre.suite
+		if(k==uppercase(c))
+			append!(mots, [mot for mot in chercherMotsPrive(fils, c)])
+		else
+			append!(mots, [string(k)*mot for mot in chercherMotsPrive(fils, c)])
+		end
+	end
+	return mots
+end
+
 function chercherMotsPrefixeArbre(arbre, prefixe)
 	if(prefixe=="")
 		mots = []
@@ -158,14 +173,14 @@ end
 # Fonction renvoyant le mot d'un texte de score maximal au Scrabble
 function scoreMaxMotArbre(arbre, dico)
 	(scoremax, motmax) = (0, "")
-	if(arbre.terminal)
+	if(length(arbre.suite)==0)
 		return (scoremax, motmax)
 	end
 	for (k,fils) in arbre.suite
 		if(all(isletter, string(k)))
 			score, mot = scoreMaxMotArbre(fils, dico)
-			println(k)
 			kscore = dico[Unicode.normalize(string(k), stripmark=true)[1]]
+
 			if((score+kscore)>scoremax)
 				(scoremax, motmax) = (score+kscore, k*mot)
 			end
