@@ -1,10 +1,10 @@
+using BenchmarkTools
 include("./Arbre.jl")
 include("./Tableau.jl")
 
 texteCyrano = "./cyrano.txt" # 36 280 mots dont 5 482 différents
 textePetitPrince = "./le_petit_prince.txt" # 15 426 mots dont 2 403 différents
 
-using BenchmarkTools
 # Segmentation du texte #
 cyranotab = segmenterTexteTableau(texteCyrano) # Version Tableau
 princetab = segmenterTexteTableau(textePetitPrince)

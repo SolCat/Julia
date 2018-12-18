@@ -9,7 +9,7 @@ mutable struct ArbreMots
     end
 end
 
-Base.show(io::IO, a::ArbreMots) = print(io, " $(a.nb) words, $(calculerNbMotsDisctinctsArbre(a)) distincts words")
+Base.show(io::IO, a::ArbreMots) = print(io, " $(a.nb) words, $(calculerNbMotsDistinctsArbre(a)) distincts words")
 
 function segmenterTexteArbre(texte)
 	arbreMots = ArbreMots()
@@ -72,7 +72,7 @@ function longueurTotaleMotsDistincts(arbre, profondeur) # => nbmotsdistincts, ta
 end
 
 function frequenceMoyenneArbre(arbre)
-	return round(100*(arbre.nb/calculerNbMotsDisctinctsArbre(arbre)))/100
+	return round(100*(arbre.nb/calculerNbMotsDistinctsArbre(arbre)))/100
 end
 
 # Fonction calculant la longeur moyenne des mots du texte
@@ -93,10 +93,10 @@ function longueurTotaleMots(arbre, profondeur) # => nbmots, taille totale
 end
 
 # Fonction calculant le nombre de mots distincts du texte
-function calculerNbMotsDisctinctsArbre(arbre)
+function calculerNbMotsDistinctsArbre(arbre)
 	count = arbre.terminal
 	for (k,fils) in arbre.suite
-		count += calculerNbMotsDisctinctsArbre(fils)
+		count += calculerNbMotsDistinctsArbre(fils)
 	end
 	return count
 end
