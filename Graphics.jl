@@ -1,5 +1,12 @@
-using Pkg
-Pkg.add("PyPlot")
-using PyPlot
-x = range(0,stop=2*pi,length=1000); y = sin.(3*x + 4*cos.(2*x))
-plot(x, y, color="red", linewidth=2.0, linestyle="--")
+include("./Arbre.jl")
+include("./Tableau.jl")
+texteCyrano = "./cyrano.txt"
+
+Pkg.add("Vega")
+
+#using Plots
+#plotly()
+#plt = plot(@elapsed segmenterTexteTableau(texteCyrano), linewidth=2)
+
+using Compat
+using Vega
