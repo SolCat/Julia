@@ -19,8 +19,11 @@ princearb = segmenterTexteArbre(textePetitPrince)
 # println(chercherMotsPrefixeArbre(princearb, "ros"))
 #
 # # Liste des mots terminant par une chaine de caractères donnée
-# chercherMotsSuffixeTab(cyranotab, "acher") # Version Tableau
-# chercherMotsSuffixeTab(princetab, "eur")
+# println(chercherMotsSuffixeTab(cyranotab, "acher")) # Version Tableau
+# println(chercherMotsSuffixeTab(princetab, "eur"))
+# println(chercherMotsSuffixeArbre(cyranoarb, "acher")) # Version Tableau
+# println(chercherMotsSuffixeArbre(princearb, "eur"))
+println(chercherMotsSuffixeArbre(princearb, "a"))
 
 # Mot d'un texte de score maximal au Scrabble
 #println(scoreMaxMotTab(cyranotab))
@@ -30,4 +33,4 @@ scrabbleDico = Dict('A' => 1, 'E' => 1, 'I' => 1, 'O' => 1, 'U' => 1, 'L' => 1,
       'C' => 3, 'M' => 3, 'P' => 3, 'F' => 4, 'H' => 4, 'V' => 4, 'W' => 4,
       'Y' => 4, 'K' => 5, 'J' => 8, 'X' => 8, 'Q' => 10, 'Z' => 10)
 
-println(scoreMaxMotArbre(cyranoarb, scrabbleDico))
+# println(scoreMaxMotArbre(cyranoarb, scrabbleDico))

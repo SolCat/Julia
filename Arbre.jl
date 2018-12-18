@@ -55,7 +55,7 @@ function verifierMotArbre(mot, arbre)
 end
 
 # Fonction calculant la longeur moyenne des mots du texte
-function calculerLongMoyMotArbre(arbre)
+function calculerLongMoyMotDistinctsArbre(arbre)
 	return floor(Int,(arbre.nb/calculerNbMotsDisctinctsArbre(arbre)))
 end
 
@@ -99,9 +99,28 @@ function chercherMotsPrefixeArbre(arbre, prefixe)
 end
 
 function chercherMotsSuffixeArbre(arbre, suffixe)
-
+	return cmsar(arbre, uppercase(suffixe), uppercase(suffixe))
 end
 
+function cmsar(arbre, cursuffixe, suffixe)
+	mots = []
+	if(cursuffixe=="")
+		if(arbre.terminal)
+			push!(mots, "")
+		end
+	else
+		if(cursuffixe[1] in keys(arbre.suite))
+			append!(mots, [cursuffixe[1:1]*mot for mot in cmsar(arbre.suite[cursuffixe[1]], cursuffixe[nextind(cursuffixe, 1):end], suffixe)])
+		end
+	end
+
+	if !(length(cursuffixe)>0 && length(cursuffixe)<length(suffixe))
+		for (k,fils) in arbre.suite
+			append!(mots, [string(k)*mot for mot in cmsar(fils, suffixe, suffixe)])
+		end
+	end
+	return mots
+end
 
 # Fonction renvoyant le mot d'un texte de score maximal au Scrabble
 function scoreMaxMotArbre(arbre, dico)
