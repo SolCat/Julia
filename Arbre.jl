@@ -37,8 +37,8 @@ function ajouterMotArbre(arbre, mot)
 			arbre.suite[first] = ArbreMots()
 		end
 		ajouterMotArbre(arbre.suite[first], mot[nextind(mot, 1):end])
-		arbre.nb += 1
 	end
+	arbre.nb += 1
 end
 
 # Fonction détectant si un mot est présent ou non
@@ -54,9 +54,42 @@ function verifierMotArbre(mot, arbre)
 	end
 end
 
-# Fonction calculant la longeur moyenne des mots du texte
+# Fonction calculant la longeur moyenne des mots distincts du texte
 function calculerLongMoyMotDistinctsArbre(arbre)
-	return floor(Int,(arbre.nb/calculerNbMotsDisctinctsArbre(arbre)))
+	nb, tailletotale = longueurTotaleMotsDistincts(arbre, 0)
+	return round(100*(tailletotale/nb))/100
+end
+
+function longueurTotaleMotsDistincts(arbre, profondeur) # => nbmotsdistincts, taille totale
+	tailletotale = arbre.terminal * profondeur
+	nb = arbre.terminal
+	for (k,fils) in arbre.suite
+		n, t = longueurTotaleMotsDistincts(fils, profondeur+1)
+		nb += n
+		tailletotale += t
+	end
+	return (nb, tailletotale)
+end
+
+function frequenceMoyenneArbre(arbre)
+	return round(100*(arbre.nb/calculerNbMotsDisctinctsArbre(arbre)))/100
+end
+
+# Fonction calculant la longeur moyenne des mots du texte
+function calculerLongMoyMotArbre(arbre)
+	nb, tailletotale = longueurTotaleMots(arbre, 0)
+	return round(100*tailletotale/nb)/100
+end
+
+function longueurTotaleMots(arbre, profondeur) # => nbmots, taille totale
+	nbfils, tailletotale = 0, 0
+	for (k,fils) in arbre.suite
+		n, t = longueurTotaleMots(fils, profondeur+1)
+		nbfils += n
+		tailletotale += t
+	end
+	tailletotale += arbre.terminal * profondeur * ( arbre.nb - nbfils )
+	return (arbre.nb, tailletotale)
 end
 
 # Fonction calculant le nombre de mots distincts du texte
