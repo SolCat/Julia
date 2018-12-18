@@ -1,0 +1,49 @@
+Chargement et segmentation des fichiers
+   Tableau :
+  2.899 s (103431172 allocations: 4.62 GiB)
+  627.150 ms (22382777 allocations: 1022.81 MiB)
+   Arbre :
+  58.192 ms (834844 allocations: 38.83 MiB)
+  18.415 ms (332111 allocations: 15.79 MiB)
+Detection existence
+   Tableau :
+  9.172 μs (5 allocations: 256 bytes)
+  3.945 μs (5 allocations: 256 bytes)
+   Arbre :
+  379.593 ns (5 allocations: 160 bytes)
+  247.123 ns (3 allocations: 96 bytes)
+Calcul longueur moyenne des mots
+   Tableau :
+  331.048 μs (10472 allocations: 292.22 KiB)
+  144.966 μs (4306 allocations: 123.70 KiB)
+   Arbre :
+  3.143 ms (1 allocation: 16 bytes)
+  1.276 ms (1 allocation: 16 bytes)
+Recherche préfixes
+   Tableau :
+  690.602 μs (27419 allocations: 1.34 MiB)
+  331.098 μs (12021 allocations: 601.02 KiB)
+   Arbre :
+  44.747 μs (958 allocations: 36.11 KiB)
+  5.173 μs (110 allocations: 3.98 KiB)
+Recherche suffixes
+   Tableau :
+  953.230 μs (32898 allocations: 1.51 MiB)
+  352.955 μs (14427 allocations: 676.66 KiB)
+   Arbre :
+  6.736 ms (53536 allocations: 3.19 MiB)
+  2.618 ms (28647 allocations: 1.64 MiB)
+Recherche du mot de score maximal au Scrabble
+   Tableau :
+  14.334 ms (71273 allocations: 3.08 MiB)
+  6.244 ms (31246 allocations: 1.35 MiB)
+   Arbre :
+  7.436 ms (106289 allocations: 3.73 MiB)
+  3.001 ms (47473 allocations: 1.67 MiB)
+Mots du tableau avec suppression d'un caractère
+   Tableau :
+  2.264 ms (26849 allocations: 1.21 MiB)
+  947.972 μs (11099 allocations: 514.53 KiB)
+   Arbre :
+  13.475 ms (160334 allocations: 6.92 MiB)
+  5.864 ms (70944 allocations: 3.05 MiB)

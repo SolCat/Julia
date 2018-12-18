@@ -14,7 +14,7 @@ end
 
 function segmenterTexteTableau(texte)
     tabMots = TableauMots()
-    sep = [' ',',',';','.','-','_','\'','`','\"','/',')','(','{','}','[',']','=','+','@','!','?','%']
+    sep = [' ',',',';','.','-','_','\'','`','\"','/',')','(','{','}','[',']','=','+','@','!','?','%','\t']
     flux = open(texte,"r")
     while ! eof(flux)
         ligne = readline(flux)
@@ -47,7 +47,7 @@ function verifierMotTableau(mot, tableau)
 	return in(uppercase(mot), tableau.mots)
 end
 
-# Fonction calculant la longeur moyenne des mots du texte
+# Fonction calculant la longueur moyenne des mots du texte
 function calculerLongMoyMotTab(tableau)
 	return round(100*(sum([length(mot)*tableau.decompte[i] for (i, mot) in enumerate(tableau.mots)]))/tableau.nbMots)/100
 end
@@ -65,12 +65,12 @@ end
 ### Fonctions supplémentaires ###
 
 # Fonction renvoyant un nouveau tableau de mots privés d'un caractère donné
-function convertirMotTab(tableau, caractere1) 
+function convertirMotTab(tableau, caractere1)
 	return [if occursin(uppercase(caractere1), mot) replace(mot, uppercase(caractere1) => "") else mot end for mot in tableau.mots]
 end
 
 # Fonction renvoyant le mot d'un texte de score maximal au Scrabble
 function scoreMaxMotTab(tableau, scrabbleDico)
 	scoreMot = findmax([(sum(get(scrabbleDico, c, 0) for c in uppercase(Unicode.normalize(mot, stripmark=true)))) for mot in tableau.mots])
-	return (tableau.mots[scoreMot[2]], scoreMot[1])	
+	return (tableau.mots[scoreMot[2]], scoreMot[1])
 end
