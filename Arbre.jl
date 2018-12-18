@@ -119,9 +119,9 @@ function motsSansLettre(arbre, c)
 	end
 	for (k,fils) in arbre.suite
 		if(k==uppercase(c))
-			append!(mots, [mot for mot in chercherMotsPrive(fils, c)])
+			append!(mots, [mot for mot in motsSansLettre(fils, c)])
 		else
-			append!(mots, [string(k)*mot for mot in chercherMotsPrive(fils, c)])
+			append!(mots, [string(k)*mot for mot in motsSansLettre(fils, c)])
 		end
 	end
 	return mots
