@@ -1,8 +1,10 @@
 include("./Arbre.jl")
 include("./Tableau.jl")
 
+using BenchmarkTools
+
 texteCyrano = "./cyrano.txt" # 36 280 mots dont 5 482 différents
-textePetitPrince = "./le_petit_prince_bis.txt" # 15 426 mots dont 2 403 différents
+textePetitPrince = "./le_petit_prince.txt" # 15 426 mots dont 2 403 différents
 
 scrabbleDico = Dict('A' => 1, 'E' => 1, 'I' => 1, 'O' => 1, 'U' => 1, 'L' => 1,
       'N' => 1, 'R' => 1, 'S' => 1, 'T' => 1, 'D' => 2, 'G' => 2, 'B' => 3,
@@ -13,8 +15,8 @@ scrabbleDico = Dict('A' => 1, 'E' => 1, 'I' => 1, 'O' => 1, 'U' => 1, 'L' => 1,
 cyranotab = segmenterTexteTableau(texteCyrano) # Version Tableau
 princetab = segmenterTexteTableau(textePetitPrince)
 
-#cyranoarb = segmenterTexteArbre(texteCyrano) # Version Arbre
-#princearb = segmenterTexteArbre(textePetitPrince)
+cyranoarb = segmenterTexteArbre(texteCyrano) # Version Arbre
+princearb = segmenterTexteArbre(textePetitPrince)
 
 #println(calculerLongMoyMotTab(princetab))
 
@@ -23,11 +25,16 @@ princetab = segmenterTexteTableau(textePetitPrince)
 # println(calculerLongMoyMotArbre(cyranoarb))
 # println(calculerLongMoyMotArbre(princearb))
 
-# # Liste des mots commençant par une chaine de caractères donnée
+# # # Liste des mots commençant par une chaine de caractères donnée
 # println(chercherMotsPrefixeTab(cyranotab, "am")) # Version Tableau
-# println(chercherMotsPrefixeTab(princetab, "ros"))
+# println(chercherMotsPrefixeTab(princetab, "ros")) # Version Tableau
+#
 # println(chercherMotsPrefixeArbre(cyranoarb, "am")) # Version Arbre
-# println(chercherMotsPrefixeArbre(princearb, "ros"))
+# println(chercherMotsPrefixeArbre(princearb, "ros")) # Version Arbre
+
+@btime chercherMotsPrefixeTab(cyranotab, "am") # Version Tableau
+@btime chercherMotsPrefixeArbre(princearb, "ros") # Version Arbre
+
 #
 # # Liste des mots terminant par une chaine de caractères donnée
 # println(chercherMotsSuffixeTab(cyranotab, "acher")) # Version Tableau
@@ -43,5 +50,8 @@ princetab = segmenterTexteTableau(textePetitPrince)
 # println(scoreMaxMotTab(princetab, scrabbleDico)) # Version Tableau
 # println(scoreMaxMotArbre(princearb, scrabbleDico))
 
-println(chercherMots(cyranoarb)[1:20])
-println(motsSansLettre(cyranoarb, 'e')[1:20])
+# println(chercherMots(cyranoarb)[1:20])
+# println(motsSansLettre(cyranoarb, 'e')[1:20])
+
+# @btime verifierMotTableau("Jaloux", cyranotab) # Version Arbre
+# @btime verifierMotArbre("Jaloux", cyranoarb) # Version Arbre

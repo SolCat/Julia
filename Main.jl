@@ -4,30 +4,55 @@ include("./Tableau.jl")
 texteCyrano = "./cyrano.txt" # 36 280 mots dont 5 482 différents
 textePetitPrince = "./le_petit_prince.txt" # 15 426 mots dont 2 403 différents
 
+using BenchmarkTools
 # Segmentation du texte #
-@time cyranotab = segmenterTexteTableau(texteCyrano) # Version Tableau
-@time princetab = segmenterTexteTableau(textePetitPrince)
+cyranotab = segmenterTexteTableau(texteCyrano) # Version Tableau
+princetab = segmenterTexteTableau(textePetitPrince)
+cyranoarb = segmenterTexteArbre(texteCyrano) # Version Arbre
+princearb = segmenterTexteArbre(textePetitPrince)
 
-@time cyranoarb = segmenterTexteArbre(texteCyrano) # Version Arbre
-@time princearb = segmenterTexteArbre(textePetitPrince)
+println("Chargement des fichiers")
+println("   Tableau :")
+@btime cyranotab = segmenterTexteTableau(texteCyrano) # Version Tableau
+@btime princetab = segmenterTexteTableau(textePetitPrince)
+
+println("   Arbre :")
+@btime cyranoarb = segmenterTexteArbre(texteCyrano) # Version Arbre
+@btime princearb = segmenterTexteArbre(textePetitPrince)
 
 # Détection de mot dans un texte #
-@time verifierMotTableau("Jaloux", cyranotab) # Version Tableau
-@time verifierMotTableau("rose", princetab)
+println("Detection existence")
+println("   Tableau :")
+@btime verifierMotTableau("Jaloux", cyranotab) # Version Tableau
+@btime verifierMotTableau("rose", princetab)
 
-@time verifierMotArbre("Jaloux", cyranoarb) # Version Arbre
-@time verifierMotArbre("rose", princearb)
+println("   Arbre :")
+@btime verifierMotArbre("Jaloux", cyranoarb) # Version Arbre
+@btime verifierMotArbre("rose", princearb)
 
 # Calcul de la longueur moyenne d'un mot dans un texte
-@time calculerLongMoyMotTab(cyranotab) # Version Tableau
-@time calculerLongMoyMotArbre(cyranoarb) # Version Arbre
+println("Calcul longueur moyenne des mots")
+println("   Tableau :")
+@btime calculerLongMoyMotTab(cyranotab) # Version Tableau
+println("   Arbre :")
+@btime calculerLongMoyMotArbre(cyranoarb) # Version Arbre
 
 # Liste des mots commençant par une chaine de caractères donnée
-@time chercherMotsPrefixeTab(cyranotab, "am") # Version Tableau
-@time chercherMotsPrefixeTab(princetab, "ros")
-@time chercherMotsPrefixeArbre(cyranoarb, "am") # Version Arbre
-@time chercherMotsPrefixeArbre(princearb, "ros")
+println("Recherche préfixes")
+println("   Tableau :")
+@btime chercherMotsPrefixeTab(cyranotab, "am") # Version Tableau
+@btime chercherMotsPrefixeTab(princetab, "ros")
+
+println("   Arbre :")
+@btime chercherMotsPrefixeArbre(cyranoarb, "am") # Version Arbre
+@btime chercherMotsPrefixeArbre(princearb, "ros")
 
 # Liste des mots terminant par une chaine de caractères donnée
-@time chercherMotsSuffixeTab(cyranotab, "acher") # Version Tableau
-@time chercherMotsSuffixeTab(princetab, "eur")
+println("Recherche suffixes")
+println("   Tableau :")
+@btime chercherMotsSuffixeTab(cyranotab, "acher") # Version Tableau
+@btime chercherMotsSuffixeTab(princetab, "eur")
+
+println("   Arbre :")
+@btime chercherMotsSuffixeArbre(cyranoarb, "acher") # Version Tableau
+@btime chercherMotsSuffixeArbre(princearb, "eur")
