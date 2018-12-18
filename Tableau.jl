@@ -62,18 +62,15 @@ function chercherMotsSuffixeTab(tableau, suffixe)
 	return([mot for mot in tableau.mots if endswith(mot, uppercase(suffixe))])
 end
 
-# Fonction renvoyant le mot qui contient le plus de lettres de l'alphabet différentes
-function motFreqTab(tableau)
+### Fonctions supplémentaires ###
+
+# Fonction un nouveau tableau de mots privés d'un caractère donné 
+function motConversionTab(tableau, caractere1) 
+	return [if occursin(uppercase(caractere1), mot) replace(mot, uppercase(caractere1) => "") else mot end for mot in tableau.mots]
+end
 
 # Fonction renvoyant le mot d'un texte de score maximal au Scrabble
-function scoreMaxMotTab(tableau)
-	maxScore = 0
-	scrabbleDico = Dict('A' => 1, 'E' => 1, 'I' => 1, 'O' => 1, 'U' => 1, 'L' => 1,
-		  'N' => 1, 'R' => 1, 'S' => 1, 'T' => 1, 'D' => 2, 'G' => 2, 'B' => 3,
-		  'C' => 3, 'M' => 3, 'P' => 3, 'F' => 4, 'H' => 4, 'V' => 4, 'W' => 4,
-		  'Y' => 4, 'K' => 5, 'J' => 8, 'X' => 8, 'Q' => 10, 'Z' => 10)
-	
+function scoreMaxMotTab(tableau, scrabbleDico)
 	scoreMot = findmax([(sum(get(scrabbleDico, c, 0) for c in uppercase(Unicode.normalize(mot)))) for mot in tableau.mots])
-	mot = (tableau.mots[scoreMot[2]], scoreMot[1])	
-	return mot
+	return (tableau.mots[scoreMot[2]], scoreMot[1])	
 end
