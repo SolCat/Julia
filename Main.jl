@@ -81,5 +81,5 @@ println("   Tableau :")
 @btime convertirMotTab(princetab, 'e')
 
 println("   Arbre :")
-@btime (cyranoarb, 'e')
+@btime motsSansLettre(cyranoarb, 'e')
 @btime motsSansLettre(princearb, 'e')

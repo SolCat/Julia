@@ -42,8 +42,8 @@ Recherche du mot de score maximal au Scrabble
   3.001 ms (47473 allocations: 1.67 MiB)
 Mots du tableau avec suppression d'un caractère
    Tableau :
-  2.274 ms (26849 allocations: 1.21 MiB)
-  953.809 μs (11099 allocations: 514.53 KiB)
+  2.264 ms (26849 allocations: 1.21 MiB)
+  947.972 μs (11099 allocations: 514.53 KiB)
    Arbre :
-  163.172 ns (1 allocation: 32 bytes)
-  5.736 ms (70944 allocations: 3.05 MiB)
+  13.475 ms (160334 allocations: 6.92 MiB)
+  5.864 ms (70944 allocations: 3.05 MiB)
