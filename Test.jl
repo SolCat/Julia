@@ -18,6 +18,11 @@ princetab = segmenterTexteTableau(textePetitPrince)
 
 #println(calculerLongMoyMotTab(princetab))
 
+println(calculerLongMoyMotDistinctsArbre(cyranoarb))
+println(calculerLongMoyMotDistinctsArbre(princearb))
+println(calculerLongMoyMotArbre(cyranoarb))
+println(calculerLongMoyMotArbre(princearb))
+
 # # Liste des mots commençant par une chaine de caractères donnée
 # println(chercherMotsPrefixeTab(cyranotab, "am")) # Version Tableau
 # println(chercherMotsPrefixeTab(princetab, "ros"))
@@ -25,15 +30,13 @@ princetab = segmenterTexteTableau(textePetitPrince)
 # println(chercherMotsPrefixeArbre(princearb, "ros"))
 #
 # # Liste des mots terminant par une chaine de caractères donnée
-# chercherMotsSuffixeTab(cyranotab, "acher") # Version Tableau
-# chercherMotsSuffixeTab(princetab, "eur")
-
-# Nouveau tableau de mots privés d'un caractère donné
-#println(convertirMotTab(cyranotab, "t")) # Version Tableau
+# println(chercherMotsSuffixeTab(cyranotab, "acher")) # Version Tableau
+# println(chercherMotsSuffixeTab(princetab, "eur"))
+# println(chercherMotsSuffixeArbre(cyranoarb, "acher")) # Version Tableau
+# println(chercherMotsSuffixeArbre(princearb, "eur"))
+# println(chercherMotsSuffixeArbre(princearb, "a"))
 
 # Mot d'un texte de score maximal au Scrabble
-println(scoreMaxMotTab(cyranotab, scrabbleDico)) # Version Tableau
+# println(scoreMaxMotTab(cyranotab, scrabbleDico)) # Version Tableau
 
-
-
-
+# println(scoreMaxMotArbre(cyranoarb, scrabbleDico))
