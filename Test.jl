@@ -12,14 +12,14 @@ cyranoarb = segmenterTexteArbre(texteCyrano) # Version Arbre
 princearb = segmenterTexteArbre(textePetitPrince)
 
 # Liste des mots commençant par une chaine de caractères donnée
-println(chercherMotsPrefixeTab(cyranotab, "am")) # Version Tableau
-println(chercherMotsPrefixeTab(princetab, "ros"))
-println(chercherMotsPrefixeArbre(cyranoarb, "am")) # Version Arbre
-println(chercherMotsPrefixeArbre(princearb, "ros"))
+#println(chercherMotsPrefixeTab(cyranotab, "am")) # Version Tableau
+#println(chercherMotsPrefixeTab(princetab, "ros"))
+#println(chercherMotsPrefixeArbre(cyranoarb, "am")) # Version Arbre
+#println(chercherMotsPrefixeArbre(princearb, "ros"))
 
 # Liste des mots terminant par une chaine de caractères donnée
 chercherMotsSuffixeTab(cyranotab, "acher") # Version Tableau
 chercherMotsSuffixeTab(princetab, "eur")
 
 # Mot d'un texte de score maximal au Scrabble
-println(scoreMaxMotTab(cyranotab))
+scoreMaxMotTab(princetab) # Version Tableau
